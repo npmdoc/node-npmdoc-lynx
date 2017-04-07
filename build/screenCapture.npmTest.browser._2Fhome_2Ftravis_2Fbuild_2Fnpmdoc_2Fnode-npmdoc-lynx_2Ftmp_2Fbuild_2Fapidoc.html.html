@@ -1,0 +1,148 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/dscape/lynx">lynx (v0.2.0)</a>
+</h1>
+<h4>Minimalistic StatsD client for Node.js programs</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.lynx">module lynx</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lynx.sample">
+            function <span class="apidocSignatureSpan">lynx.</span>sample
+            <span class="apidocSignatureSpan">(stats, sample_rate)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.lynx.super_">
+            function <span class="apidocSignatureSpan">lynx.</span>super_
+            <span class="apidocSignatureSpan">()</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.lynx" id="apidoc.module.lynx">module lynx</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.lynx.sample" id="apidoc.element.lynx.sample">
+        function <span class="apidocSignatureSpan">lynx.</span>sample
+        <span class="apidocSignatureSpan">(stats, sample_rate)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function sample(stats, sample_rate) {
+  //
+  // If we don't have a sample rate between 0 and 1
+  //
+  if (typeof sample_rate !== 'number' || sample_rate &gt; 1 || sample_rate &lt; 0) {
+    //
+    // Had to ignore the invalid sample rate
+    // Most of the times this is because sample_rate is undefined
+    //
+    return stats;
+  }
+
+  var sampled_stats = {};
+
+  //
+  // Randomly determine if we should sample this specific instance
+  //
+  if (mt.genrand_real2(0,1) &lt;= sample_rate) {
+    //
+    // Note: Current implementation either sends all stats for a specific
+    //       sample rate or sends none. Makes one wonder if granularity
+    //       should be at the individual stat level
+    //
+    Object.keys(stats).forEach(function construct_sampled(stat) {
+      var value = stats[stat];
+      sampled_stats[stat] = value + '|@' + sample_rate;
+    });
+  }
+
+  return sampled_stats;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.lynx.super_" id="apidoc.element.lynx.super_">
+        function <span class="apidocSignatureSpan">lynx.</span>super_
+        <span class="apidocSignatureSpan">()</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function Stream() {
+  EE.call(this);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
