@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/dscape/lynx"
-
-    >lynx (v0.2.0)</a>
+    <a href="https://github.com/dscape/lynx">lynx (v0.2.0)</a>
 </h1>
 <h4>Minimalistic StatsD client for Node.js programs</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.lynx">module lynx</a><ol>
 
@@ -280,31 +273,31 @@
   //
   // Server hostname and port
   //
-  this.host = host || &#x27;127.0.0.1&#x27;;
+  this.host = host || '127.0.0.1';
   this.port = port || 8125;
 
   //
   // Optional shared socket
   //
-  this.socket = options &#x26;&#x26; options.socket;
+  this.socket = options &amp;&amp; options.socket;
 
   //
   // Handle prefix
   //
-  this.scope = options &#x26;&#x26; options.scope || options &#x26;&#x26; options.prefix || &#x27;&#x27;;
+  this.scope = options &amp;&amp; options.scope || options &amp;&amp; options.prefix || '';
 
   //
   // groups in graphite are delimited by `.` so we need to make sure our
-  // scope ends with `.`. If it doesn&#x27;t we just add it (unless we have no
+  // scope ends with `.`. If it doesn't we just add it (unless we have no
   // scope defined).
   //
-  if(typeof this.scope === &#x27;string&#x27; &#x26;&#x26; this.scope !== &#x27;&#x27; &#x26;&#x26;
+  if(typeof this.scope === 'string' &amp;&amp; this.scope !== '' &amp;&amp;
      !/\.$/.test(this.scope)) {
-    this.scope += &#x27;.&#x27;;
+    this.scope += '.';
   }
 
   //
-  // When a *shared* socked isn&#x27;t provided, an ephemeral
+  // When a *shared* socked isn't provided, an ephemeral
   // socket is demand allocated.  This ephemeral socket is closed
   // after being idle for EPHEMERAL_LIFETIME_MS.
   //
@@ -314,7 +307,7 @@
   //
   // Set out error handling code
   //
-  this.on_error = options &#x26;&#x26; typeof options.on_error === &#x27;function&#x27;
+  this.on_error = options &amp;&amp; typeof options.on_error === 'function'
                ? options.on_error
                : this._default_error_handler
                ;
@@ -327,21 +320,21 @@
 
   this.parser = parser.createStream();
 
-  this.parser.on(&#x27;error&#x27;, this.on_error);
+  this.parser.on('error', this.on_error);
 
-  this.parser.on(&#x27;stat&#x27;, function (text, stat_obj) {
+  this.parser.on('stat', function (text, stat_obj) {
     var stat = {};
 
     //
     // Construct a statsd value|type pair
     //
-    stat[stat_obj.stat] = stat_obj.value + &#x27;|&#x27; + stat_obj.type;
+    stat[stat_obj.stat] = stat_obj.value + '|' + stat_obj.type;
 
     //
     // Add sample rate if one exists
     //
     if(stat_obj.sample_rate) {
-      stat[stat_obj.stat] += &#x27;@&#x27; + stat_obj.sample_rate;
+      stat[stat_obj.stat] += '@' + stat_obj.sample_rate;
       self.send(stat, parseFloat(stat_obj.sample_rate));
     }
     else {
@@ -363,9 +356,9 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function sample(stats, sample_rate) {
   //
-  // If we don&#x27;t have a sample rate between 0 and 1
+  // If we don't have a sample rate between 0 and 1
   //
-  if (typeof sample_rate !== &#x27;number&#x27; || sample_rate &#x3e; 1 || sample_rate &#x3c; 0) {
+  if (typeof sample_rate !== 'number' || sample_rate &gt; 1 || sample_rate &lt; 0) {
     //
     // Had to ignore the invalid sample rate
     // Most of the times this is because sample_rate is undefined
@@ -378,7 +371,7 @@
   //
   // Randomly determine if we should sample this specific instance
   //
-  if (mt.genrand_real2(0,1) &#x3c;= sample_rate) {
+  if (mt.genrand_real2(0,1) &lt;= sample_rate) {
     //
     // Note: Current implementation either sends all stats for a specific
     //       sample rate or sends none. Makes one wonder if granularity
@@ -386,7 +379,7 @@
     //
     Object.keys(stats).forEach(function construct_sampled(stat) {
       var value = stats[stat];
-      sampled_stats[stat] = value + &#x27;|@&#x27; + sample_rate;
+      sampled_stats[stat] = value + '|@' + sample_rate;
     });
   }
 
@@ -436,31 +429,31 @@
   //
   // Server hostname and port
   //
-  this.host = host || &#x27;127.0.0.1&#x27;;
+  this.host = host || '127.0.0.1';
   this.port = port || 8125;
 
   //
   // Optional shared socket
   //
-  this.socket = options &#x26;&#x26; options.socket;
+  this.socket = options &amp;&amp; options.socket;
 
   //
   // Handle prefix
   //
-  this.scope = options &#x26;&#x26; options.scope || options &#x26;&#x26; options.prefix || &#x27;&#x27;;
+  this.scope = options &amp;&amp; options.scope || options &amp;&amp; options.prefix || '';
 
   //
   // groups in graphite are delimited by `.` so we need to make sure our
-  // scope ends with `.`. If it doesn&#x27;t we just add it (unless we have no
+  // scope ends with `.`. If it doesn't we just add it (unless we have no
   // scope defined).
   //
-  if(typeof this.scope === &#x27;string&#x27; &#x26;&#x26; this.scope !== &#x27;&#x27; &#x26;&#x26;
+  if(typeof this.scope === 'string' &amp;&amp; this.scope !== '' &amp;&amp;
      !/\.$/.test(this.scope)) {
-    this.scope += &#x27;.&#x27;;
+    this.scope += '.';
   }
 
   //
-  // When a *shared* socked isn&#x27;t provided, an ephemeral
+  // When a *shared* socked isn't provided, an ephemeral
   // socket is demand allocated.  This ephemeral socket is closed
   // after being idle for EPHEMERAL_LIFETIME_MS.
   //
@@ -470,7 +463,7 @@
   //
   // Set out error handling code
   //
-  this.on_error = options &#x26;&#x26; typeof options.on_error === &#x27;function&#x27;
+  this.on_error = options &amp;&amp; typeof options.on_error === 'function'
                ? options.on_error
                : this._default_error_handler
                ;
@@ -483,21 +476,21 @@
 
   this.parser = parser.createStream();
 
-  this.parser.on(&#x27;error&#x27;, this.on_error);
+  this.parser.on('error', this.on_error);
 
-  this.parser.on(&#x27;stat&#x27;, function (text, stat_obj) {
+  this.parser.on('stat', function (text, stat_obj) {
     var stat = {};
 
     //
     // Construct a statsd value|type pair
     //
-    stat[stat_obj.stat] = stat_obj.value + &#x27;|&#x27; + stat_obj.type;
+    stat[stat_obj.stat] = stat_obj.value + '|' + stat_obj.type;
 
     //
     // Add sample rate if one exists
     //
     if(stat_obj.sample_rate) {
-      stat[stat_obj.stat] += &#x27;@&#x27; + stat_obj.sample_rate;
+      stat[stat_obj.stat] += '@' + stat_obj.sample_rate;
       self.send(stat, parseFloat(stat_obj.sample_rate));
     }
     else {
@@ -519,9 +512,9 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function sample(stats, sample_rate) {
   //
-  // If we don&#x27;t have a sample rate between 0 and 1
+  // If we don't have a sample rate between 0 and 1
   //
-  if (typeof sample_rate !== &#x27;number&#x27; || sample_rate &#x3e; 1 || sample_rate &#x3c; 0) {
+  if (typeof sample_rate !== 'number' || sample_rate &gt; 1 || sample_rate &lt; 0) {
     //
     // Had to ignore the invalid sample rate
     // Most of the times this is because sample_rate is undefined
@@ -534,7 +527,7 @@
   //
   // Randomly determine if we should sample this specific instance
   //
-  if (mt.genrand_real2(0,1) &#x3c;= sample_rate) {
+  if (mt.genrand_real2(0,1) &lt;= sample_rate) {
     //
     // Note: Current implementation either sends all stats for a specific
     //       sample rate or sends none. Makes one wonder if granularity
@@ -542,7 +535,7 @@
     //
     Object.keys(stats).forEach(function construct_sampled(stat) {
       var value = stats[stat];
-      sampled_stats[stat] = value + &#x27;|@&#x27; + sample_rate;
+      sampled_stats[stat] = value + '|@' + sample_rate;
     });
   }
 
@@ -581,7 +574,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function _default_error_handler(e) {
-  this.emit(&#x27;error&#x27;, e);
+  this.emit('error', e);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -665,8 +658,8 @@
   }
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  , &#x22;baz&#x22; : &#x22;500|ms&#x22;  // timing
-  , &#x22;boaz&#x22;: &#x22;40|s&#x22;    // set
+  , "baz" : "500|ms"  // timing
+  , "boaz": "40|s"    // set
   }, 0.1);            // sample rate at `0.1`
 ```
 
@@ -697,7 +690,7 @@ function on_error(err) {
   //
   // If we are given a string stat (key) then transform it into array
   //
-  if (typeof stats === &#x27;string&#x27;) {
+  if (typeof stats === 'string') {
     stats = [stats];
   }
 
@@ -706,11 +699,11 @@ function on_error(err) {
   //
   if(!Array.isArray(stats)) {
     //
-    // Error: Can&#x27;t set if its not even an array by now
+    // Error: Can't set if its not even an array by now
     //
     this.on_error(
-      makeError({ message : &#x22;Can&#x27;t set if its not even an array by now&#x22;
-      , f       : &#x27;count&#x27;
+      makeError({ message : "Can't set if its not even an array by now"
+      , f       : 'count'
       , args    : arguments
       }));
     return;
@@ -719,13 +712,13 @@ function on_error(err) {
   //
   // Delta is required and must exist or we will send crap to statsd
   //
-  if (typeof delta!==&#x27;number&#x27; &#x26;&#x26; typeof delta!==&#x27;string&#x27; || isNaN(delta)) {
+  if (typeof delta!=='number' &amp;&amp; typeof delta!=='string' || isNaN(delta)) {
     //
     // Error: Must be either a number or a string, we cant send other stuff
     //
     this.on_error(
-      makeError({ message : &#x27;Must be either a number or a string&#x27;
-      , f       : &#x27;count&#x27;
+      makeError({ message : 'Must be either a number or a string'
+      , f       : 'count'
       , args    : arguments
       }));
     return;
@@ -736,7 +729,7 @@ function on_error(err) {
   //
   var batch = {};
   for(var i in stats) {
-    batch[stats[i]] = delta + &#x27;|c&#x27;;
+    batch[stats[i]] = delta + '|c';
   }
 
   //
@@ -764,7 +757,7 @@ function on_error(err) {
     , start_hrtime
     ;
 
-  if (typeof process.hrtime === &#x22;function&#x22;) {
+  if (typeof process.hrtime === "function") {
     var start_hrtime = process.hrtime();
   }
 
@@ -780,8 +773,8 @@ function on_error(err) {
     //
     if(stopped) {
       self.on_error(
-        makeError({ message : &#x22;Can&#x27;t stop a timer twice&#x22;
-        , f       : &#x27;stop&#x27;
+        makeError({ message : "Can't stop a timer twice"
+        , f       : 'stop'
         }));
       return;
     }
@@ -822,13 +815,13 @@ function on_error(err) {
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 ```
-var metrics = new lynx(&#x27;localhost&#x27;, 8125);
-metrics.increment(&#x27;node_test.int&#x27;, 0.1);
-metrics.decrement(&#x27;node_test.int&#x27;, 0.1);
-metrics.timing(&#x27;node_test.some_service.task.time&#x27;, 500, 0.1);
-metrics.gauge(&#x27;gauge.one&#x27;, 100, 0.1);
-metrics.set(&#x27;set.one&#x27;, 10, 0.1);
-var timer2 = metrics.<span class="apidocCodeKeywordSpan">createTimer</span>(&#x27;node_test.some_service.task2.time&#x27;, 0.1);
+var metrics = new lynx('localhost', 8125);
+metrics.increment('node_test.int', 0.1);
+metrics.decrement('node_test.int', 0.1);
+metrics.timing('node_test.some_service.task.time', 500, 0.1);
+metrics.gauge('gauge.one', 100, 0.1);
+metrics.set('set.one', 10, 0.1);
+var timer2 = metrics.<span class="apidocCodeKeywordSpan">createTimer</span>('node_test.some_service.task2.time', 0.1);
 timer2.stop();
 ```
 
@@ -852,16 +845,16 @@ You can stream to `lynx`:
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 //   * `scope` to define the a prefix for all stats, e.g. with `scope`
-//     &#x27;product1&#x27; and stat &#x27;somestat&#x27; the key would actually be
-//     &#x27;product1.somestat&#x27;
+//     'product1' and stat 'somestat' the key would actually be
+//     'product1.somestat'
 //
-&#x3e; var metrics = new lynx(&#x27;localhost&#x27;, 8125);
-{ host: &#x27;localhost&#x27;, port: 8125 }
-&#x3e; metrics.increment(&#x27;node_test.int&#x27;);
-&#x3e; metrics.<span class="apidocCodeKeywordSpan">decrement</span>(&#x27;node_test.int&#x27;);
-&#x3e; metrics.timing(&#x27;node_test.some_service.task.time&#x27;, 500); // time in ms
-&#x3e; metrics.gauge(&#x27;gauge.one&#x27;, 100);
-&#x3e; metrics.set(&#x27;set.one&#x27;, 10);
+&gt; var metrics = new lynx('localhost', 8125);
+{ host: 'localhost', port: 8125 }
+&gt; metrics.increment('node_test.int');
+&gt; metrics.<span class="apidocCodeKeywordSpan">decrement</span>('node_test.int');
+&gt; metrics.timing('node_test.some_service.task.time', 500); // time in ms
+&gt; metrics.gauge('gauge.one', 100);
+&gt; metrics.set('set.one', 10);
 ```
 
 This is the equivalent to:
@@ -894,7 +887,7 @@ This is the equivalent to:
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function end(buffer) {
   //
-  // If there&#x27;s stuff to flush please do
+  // If there's stuff to flush please do
   //
   if (arguments.length) {
     this.write(buffer);
@@ -919,25 +912,25 @@ This is the equivalent to:
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function gauge(stat, value, sample_rate) {
   var stats   = {};
-  stats[stat] = value + &#x27;|g&#x27;;
+  stats[stat] = value + '|g';
   this.send(stats, sample_rate);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-//     &#x27;product1.somestat&#x27;
+//     'product1.somestat'
 //
-&#x3e; var metrics = new lynx(&#x27;localhost&#x27;, 8125);
-{ host: &#x27;localhost&#x27;, port: 8125 }
-&#x3e; metrics.increment(&#x27;node_test.int&#x27;);
-&#x3e; metrics.decrement(&#x27;node_test.int&#x27;);
-&#x3e; metrics.timing(&#x27;node_test.some_service.task.time&#x27;, 500); // time in ms
-&#x3e; metrics.<span class="apidocCodeKeywordSpan">gauge</span>(&#x27;gauge.one&#x27;, 100);
-&#x3e; metrics.set(&#x27;set.one&#x27;, 10);
+&gt; var metrics = new lynx('localhost', 8125);
+{ host: 'localhost', port: 8125 }
+&gt; metrics.increment('node_test.int');
+&gt; metrics.decrement('node_test.int');
+&gt; metrics.timing('node_test.some_service.task.time', 500); // time in ms
+&gt; metrics.<span class="apidocCodeKeywordSpan">gauge</span>('gauge.one', 100);
+&gt; metrics.set('set.one', 10);
 ```
 
 This is the equivalent to:
 
 ``` sh
-echo &#x22;node_test.int:1|c&#x22;  | nc -w 0 -u localhost 8125
+echo "node_test.int:1|c"  | nc -w 0 -u localhost 8125
 ...</pre></li>
     </ul>
 
@@ -956,16 +949,16 @@ echo &#x22;node_test.int:1|c&#x22;  | nc -w 0 -u localhost 8125
     <li>example usage<pre class="apidocCodePre">...
 //   * `socket` if you wish to just use a existing udp socket
 //   * `scope` to define the a prefix for all stats, e.g. with `scope`
-//     &#x27;product1&#x27; and stat &#x27;somestat&#x27; the key would actually be
-//     &#x27;product1.somestat&#x27;
+//     'product1' and stat 'somestat' the key would actually be
+//     'product1.somestat'
 //
-&#x3e; var metrics = new lynx(&#x27;localhost&#x27;, 8125);
-{ host: &#x27;localhost&#x27;, port: 8125 }
-&#x3e; metrics.<span class="apidocCodeKeywordSpan">increment</span>(&#x27;node_test.int&#x27;);
-&#x3e; metrics.decrement(&#x27;node_test.int&#x27;);
-&#x3e; metrics.timing(&#x27;node_test.some_service.task.time&#x27;, 500); // time in ms
-&#x3e; metrics.gauge(&#x27;gauge.one&#x27;, 100);
-&#x3e; metrics.set(&#x27;set.one&#x27;, 10);
+&gt; var metrics = new lynx('localhost', 8125);
+{ host: 'localhost', port: 8125 }
+&gt; metrics.<span class="apidocCodeKeywordSpan">increment</span>('node_test.int');
+&gt; metrics.decrement('node_test.int');
+&gt; metrics.timing('node_test.some_service.task.time', 500); // time in ms
+&gt; metrics.gauge('gauge.one', 100);
+&gt; metrics.set('set.one', 10);
 ```
 
 This is the equivalent to:
@@ -999,8 +992,8 @@ This is the equivalent to:
     // Error: Nothing to send
     //
     this.on_error(
-      makeError({ message : &#x27;Nothing to send&#x27;
-      , f       : &#x27;send&#x27;
+      makeError({ message : 'Nothing to send'
+      , f       : 'send'
       , args    : arguments
       }));
     return;
@@ -1012,13 +1005,13 @@ This is the equivalent to:
   // This is achieved by having newline separated stats.
   //
   send_data = all_stats.map(function construct_stat(stat) {
-    return self.scope + stat + &#x27;:&#x27; + sampled_stats[stat];
-  }).join(&#x27;\n&#x27;);
+    return self.scope + stat + ':' + sampled_stats[stat];
+  }).join('\n');
 
   //
   // Encode our data to a buffer
   //
-  var buffer = new Buffer(send_data, &#x27;utf8&#x27;)
+  var buffer = new Buffer(send_data, 'utf8')
     , socket
     ;
 
@@ -1033,15 +1026,15 @@ This is the equivalent to:
       //
       // Create one
       //
-      this.ephemeral_socket = dgram.createSocket(&#x27;udp4&#x27;);
+      this.ephemeral_socket = dgram.createSocket('udp4');
 
       //
       // Register on error: Failed sending the buffer
       //
-      this.ephemeral_socket.on(&#x27;error&#x27;, function (err) {
+      this.ephemeral_socket.on('error', function (err) {
         err.reason  = err.message;
-        err.f       = &#x27;send&#x27;;
-        err.message = &#x27;Failed sending the buffer&#x27;;
+        err.f       = 'send';
+        err.message = 'Failed sending the buffer';
         err.args    = arguments;
         self.on_error(err);
         return;
@@ -1065,7 +1058,7 @@ This is the equivalent to:
   //
   // Send the data
   //
-  this.emit(&#x27;data&#x27;, buffer);
+  this.emit('data', buffer);
   socket.send(buffer, 0, buffer.length, this.port, this.host, noop);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
@@ -1077,10 +1070,10 @@ This is the equivalent to:
 // or none would be sent.
 //
 metrics.<span class="apidocCodeKeywordSpan">send</span>(
-  { &#x22;foo&#x22; : &#x22;-1|c&#x22;    // count
-  , &#x22;bar&#x22; : &#x22;15|g&#x22;    // gauge
-  , &#x22;baz&#x22; : &#x22;500|ms&#x22;  // timing
-  , &#x22;boaz&#x22;: &#x22;40|s&#x22;    // set
+  { "foo" : "-1|c"    // count
+  , "bar" : "15|g"    // gauge
+  , "baz" : "500|ms"  // timing
+  , "boaz": "40|s"    // set
   }, 0.1);            // sample rate at `0.1`
 ```
 ...</pre></li>
@@ -1097,25 +1090,25 @@ metrics.<span class="apidocCodeKeywordSpan">send</span>(
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function set(stat, value, sample_rate) {
   var stats   = {};
-  stats[stat] = value + &#x27;|s&#x27;;
+  stats[stat] = value + '|s';
   this.send(stats, sample_rate);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 //
-&#x3e; var metrics = new lynx(&#x27;localhost&#x27;, 8125);
-{ host: &#x27;localhost&#x27;, port: 8125 }
-&#x3e; metrics.increment(&#x27;node_test.int&#x27;);
-&#x3e; metrics.decrement(&#x27;node_test.int&#x27;);
-&#x3e; metrics.timing(&#x27;node_test.some_service.task.time&#x27;, 500); // time in ms
-&#x3e; metrics.gauge(&#x27;gauge.one&#x27;, 100);
-&#x3e; metrics.<span class="apidocCodeKeywordSpan">set</span>(&#x27;set.one&#x27;, 10);
+&gt; var metrics = new lynx('localhost', 8125);
+{ host: 'localhost', port: 8125 }
+&gt; metrics.increment('node_test.int');
+&gt; metrics.decrement('node_test.int');
+&gt; metrics.timing('node_test.some_service.task.time', 500); // time in ms
+&gt; metrics.gauge('gauge.one', 100);
+&gt; metrics.<span class="apidocCodeKeywordSpan">set</span>('set.one', 10);
 ```
 
 This is the equivalent to:
 
 ``` sh
-echo &#x22;node_test.int:1|c&#x22;  | nc -w 0 -u localhost 8125
-echo &#x22;node_test.int:-1|c&#x22; | nc -w 0 -u localhost 8125
+echo "node_test.int:1|c"  | nc -w 0 -u localhost 8125
+echo "node_test.int:-1|c" | nc -w 0 -u localhost 8125
 ...</pre></li>
     </ul>
 
@@ -1130,21 +1123,21 @@ echo &#x22;node_test.int:-1|c&#x22; | nc -w 0 -u localhost 8125
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function timing(stat, duration, sample_rate) {
   var stats   = {};
-  stats[stat] = duration + &#x27;|ms&#x27;;
+  stats[stat] = duration + '|ms';
   this.send(stats, sample_rate);
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-//     &#x27;product1&#x27; and stat &#x27;somestat&#x27; the key would actually be
-//     &#x27;product1.somestat&#x27;
+//     'product1' and stat 'somestat' the key would actually be
+//     'product1.somestat'
 //
-&#x3e; var metrics = new lynx(&#x27;localhost&#x27;, 8125);
-{ host: &#x27;localhost&#x27;, port: 8125 }
-&#x3e; metrics.increment(&#x27;node_test.int&#x27;);
-&#x3e; metrics.decrement(&#x27;node_test.int&#x27;);
-&#x3e; metrics.<span class="apidocCodeKeywordSpan">timing</span>(&#x27;node_test.some_service.task.time&#x27;, 500); // time in
+&gt; var metrics = new lynx('localhost', 8125);
+{ host: 'localhost', port: 8125 }
+&gt; metrics.increment('node_test.int');
+&gt; metrics.decrement('node_test.int');
+&gt; metrics.<span class="apidocCodeKeywordSpan">timing</span>('node_test.some_service.task.time', 500); // time in
 ms
-&#x3e; metrics.gauge(&#x27;gauge.one&#x27;, 100);
-&#x3e; metrics.set(&#x27;set.one&#x27;, 10);
+&gt; metrics.gauge('gauge.one', 100);
+&gt; metrics.set('set.one', 10);
 ```
 
 This is the equivalent to:
@@ -1177,3 +1170,4 @@ This is the equivalent to:
     ]
 </div>
 </div>
+</body></html>
