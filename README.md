@@ -1,9 +1,14 @@
-# api documentation for  [lynx (v0.2.0)](https://github.com/dscape/lynx)  [![npm package](https://img.shields.io/npm/v/npmdoc-lynx.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-lynx) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-lynx.svg)](https://travis-ci.org/npmdoc/node-npmdoc-lynx)
+# npmdoc-lynx
+
+#### api documentation for  [lynx (v0.2.0)](https://github.com/dscape/lynx)  [![npm package](https://img.shields.io/npm/v/npmdoc-lynx.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-lynx) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-lynx.svg)](https://travis-ci.org/npmdoc/node-npmdoc-lynx)
+
 #### Minimalistic StatsD client for Node.js programs
 
-[![NPM](https://nodei.co/npm/lynx.png?downloads=true)](https://www.npmjs.com/package/lynx)
+[![NPM](https://nodei.co/npm/lynx.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/lynx)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-lynx/build/screenCapture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-lynx_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-lynx/build/apidoc.html)
+- [https://npmdoc.github.io/node-npmdoc-lynx/build/apidoc.html](https://npmdoc.github.io/node-npmdoc-lynx/build/apidoc.html)
+
+[![apidoc](https://npmdoc.github.io/node-npmdoc-lynx/build/screenCapture.buildCi.browser.%252Ftmp%252Fbuild%252Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-lynx/build/apidoc.html)
 
 ![npmPackageListing](https://npmdoc.github.io/node-npmdoc-lynx/build/screenCapture.npmPackageListing.svg)
 
@@ -25,7 +30,6 @@
     "contributors": [
         {
             "name": "Nuno Job",
-            "email": "nunojobpinto@gmail.com",
             "url": "http://nunojob.com"
         },
         {
@@ -68,17 +72,14 @@
     "main": "./lib/lynx",
     "maintainers": [
         {
-            "name": "dscape",
-            "email": "nunojobpinto@gmail.com"
+            "name": "dscape"
         },
         {
-            "name": "lloyd",
-            "email": "lloyd@hilaiel.com"
+            "name": "lloyd"
         }
     ],
     "name": "lynx",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/dscape/lynx.git"
@@ -88,70 +89,6 @@
     },
     "version": "0.2.0"
 }
-```
-
-
-
-# <a name="apidoc.tableOfContents"></a>[table of contents](#apidoc.tableOfContents)
-
-#### [module lynx](#apidoc.module.lynx)
-1.  [function <span class="apidocSignatureSpan">lynx.</span>sample (stats, sample_rate)](#apidoc.element.lynx.sample)
-1.  [function <span class="apidocSignatureSpan">lynx.</span>super_ ()](#apidoc.element.lynx.super_)
-
-
-
-# <a name="apidoc.module.lynx"></a>[module lynx](#apidoc.module.lynx)
-
-#### <a name="apidoc.element.lynx.sample"></a>[function <span class="apidocSignatureSpan">lynx.</span>sample (stats, sample_rate)](#apidoc.element.lynx.sample)
-- description and source-code
-```javascript
-function sample(stats, sample_rate) {
-  //
-  // If we don't have a sample rate between 0 and 1
-  //
-  if (typeof sample_rate !== 'number' || sample_rate > 1 || sample_rate < 0) {
-    //
-    // Had to ignore the invalid sample rate
-    // Most of the times this is because sample_rate is undefined
-    //
-    return stats;
-  }
-
-  var sampled_stats = {};
-
-  //
-  // Randomly determine if we should sample this specific instance
-  //
-  if (mt.genrand_real2(0,1) <= sample_rate) {
-    //
-    // Note: Current implementation either sends all stats for a specific
-    //       sample rate or sends none. Makes one wonder if granularity
-    //       should be at the individual stat level
-    //
-    Object.keys(stats).forEach(function construct_sampled(stat) {
-      var value = stats[stat];
-      sampled_stats[stat] = value + '|@' + sample_rate;
-    });
-  }
-
-  return sampled_stats;
-}
-```
-- example usage
-```shell
-n/a
-```
-
-#### <a name="apidoc.element.lynx.super_"></a>[function <span class="apidocSignatureSpan">lynx.</span>super_ ()](#apidoc.element.lynx.super_)
-- description and source-code
-```javascript
-function Stream() {
-  EE.call(this);
-}
-```
-- example usage
-```shell
-n/a
 ```
 
 
